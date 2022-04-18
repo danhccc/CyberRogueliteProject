@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class SpeedBoost : MonoBehaviour
 {
-    public PlayerBehaviour pb;
+    public ThirdPersonController player;
 
     // Start is called before the first frame update
     void Start()
@@ -20,10 +21,10 @@ public class SpeedBoost : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Player") && !pb.isSpeedBoosting)
+        if (other.gameObject.CompareTag("Player") && !player.isSpeedBoosting)
         {
-            pb.isSpeedBoosting = true;
-            pb.walkSpeed = 10;
+            player.isSpeedBoosting = true;
+            player.SprintSpeed *= 2;
             this.gameObject.transform.localScale = new Vector3(0, 0, 0);
             print("Starting boosting");
             StartCoroutine(BuffDuration());
@@ -32,10 +33,10 @@ public class SpeedBoost : MonoBehaviour
 
     IEnumerator BuffDuration()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(10);
         print("End boosting");
-        pb.isSpeedBoosting = false;
-        pb.walkSpeed = 5;
+        player.isSpeedBoosting = false;
+        player.SprintSpeed /= 2;
 
         Destroy(this.gameObject);
     }

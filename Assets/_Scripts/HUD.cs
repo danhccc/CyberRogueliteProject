@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using StarterAssets;
 
 public class HUD : MonoBehaviour
 {
-    public TextMeshProUGUI healthText;
+    public ThirdPersonController player;
+
     public Image speedBoostIcon;
     public Image jumpBoostIcon;
 
-    public PlayerBehaviour player;
 
     private Color hideIcon = new Color(255, 255, 255, 0);
     private Color showIcon = new Color(255, 255, 255, 255);
@@ -21,12 +22,12 @@ public class HUD : MonoBehaviour
     {
         speedBoostIcon.color = hideIcon;
         jumpBoostIcon.color = hideIcon;
+        Time.timeScale = 1;
     }   
 
     // Update is called once per frame
     void Update()
     {
-        healthText.text = "Health: " + player.health.ToString();
 
         if (player.isSpeedBoosting)
         {
@@ -47,13 +48,4 @@ public class HUD : MonoBehaviour
         }
     }
 
-    public void ResetLevel()
-    {
-        SceneManager.LoadScene("SampleScene");
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
-    }
 }

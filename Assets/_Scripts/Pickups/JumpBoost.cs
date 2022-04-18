@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class JumpBoost : MonoBehaviour
 {
     public PlayerBehaviour pb;
+    public ThirdPersonController player;
 
     // Start is called before the first frame update
     void Start()
@@ -22,21 +24,28 @@ public class JumpBoost : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            pb.isJumpBoosting = true;
-            pb.jumpForce = 10;
+            player.isJumpBoosting = true;
+            player.JumpHeight = 5f;
             this.gameObject.transform.localScale = new Vector3(0, 0, 0);
             print("Starting boosting");
             StartCoroutine(BuffDuration());
+            StartCoroutine(ResetTimer());
         }
     }
 
     IEnumerator BuffDuration()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         print("End boosting");
-        pb.isJumpBoosting = false;
-        pb.jumpForce = 5;
+        player.isJumpBoosting = false;
+        player.JumpHeight = 1.2f;
 
-        Destroy(this.gameObject);
+        this.gameObject.SetActive(false);
+    }
+
+    IEnumerator ResetTimer()
+    {
+        yield return new WaitForSeconds(15);
+        this.gameObject.SetActive(true);
     }
 }

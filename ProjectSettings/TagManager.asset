@@ -5,17 +5,23 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - CinemachineTarget
+  - Damager
+  - Bullet
+  - Enemy
+  - Health
+  - Ammo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - SceneObj
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - LightWall
+  - NPC
+  - Player
+  - Damager
   - 
   - 
   - 
